@@ -1,40 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Signup</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram • Sign up</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+.logo {
+  font-family: 'Grand Hotel', cursive;
+}
+</style>
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<body class="bg-[#fafafa] flex items-center justify-center min-h-screen">
 
-<div class="bg-white p-6 rounded-xl shadow w-80">
-  <h2 class="text-xl font-bold mb-4 text-center">Signup</h2>
+<div class="flex w-full max-w-4xl">
 
-  <input id="username" placeholder="Username"
-    class="w-full mb-3 p-2 border rounded"/>
+  <!-- Left Image (Desktop only) -->
+  <div class="hidden md:flex w-1/2 items-center justify-center">
+    <img src="https://img.freepik.com/free-vector/instagram-icon_1057-2227.jpg?t=st=1775742224~exp=1775745824~hmac=f5f26ddb28797c0c4184506e404169dfc21264cf4c2da79d483652244ffa8b05&w=1060" class="max-h-[600px]" />
+  </div>
 
-  <input id="email" placeholder="Email"
-    class="w-full mb-3 p-2 border rounded"/>
+  <!-- Right Signup -->
+  <div class="w-full md:w-1/2 flex flex-col items-center">
 
-  <input id="password" type="password" placeholder="Password"
-    class="w-full mb-3 p-2 border rounded"/>
+    <!-- Signup Box -->
+    <div class="bg-white border w-[350px] p-8 mt-6">
 
-  <button onclick="signup()"
-    class="w-full bg-red-500 text-white py-2 rounded">
-    Signup
-  </button>
+      <!-- Logo -->
+      <h1 class="logo text-4xl text-center mb-4">Instagram</h1>
 
-  <p class="text-sm mt-3 text-center">
-    Already have account?
-    <a href="login.html" class="text-red-500">Login</a>
-  </p>
+      <!-- Subtitle -->
+      <p class="text-center text-gray-500 text-sm mb-4">
+        Sign up to see photos and videos from your friends.
+      </p>
+
+      <!-- Facebook -->
+      <button class="w-full bg-blue-600 text-white py-2 rounded font-semibold mb-3">
+        Log in with Facebook
+      </button>
+
+      <!-- Divider -->
+      <div class="flex items-center my-4">
+        <div class="flex-1 h-px bg-gray-300"></div>
+        <span class="px-3 text-gray-400 text-sm">OR</span>
+        <div class="flex-1 h-px bg-gray-300"></div>
+      </div>
+
+      <!-- Inputs -->
+      <input id="email" type="text" placeholder="Mobile Number or Email"
+        class="w-full mb-2 p-2 border rounded bg-gray-50 text-sm"/>
+
+      <input id="username" placeholder="Username"
+        class="w-full mb-2 p-2 border rounded bg-gray-50 text-sm"/>
+
+      <input id="password" type="password" placeholder="Password"
+        class="w-full mb-3 p-2 border rounded bg-gray-50 text-sm"/>
+
+      <!-- Signup Button -->
+      <button onclick="signup()"
+        class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded font-semibold">
+        Sign up
+      </button>
+
+      <!-- Terms -->
+      <p class="text-xs text-gray-400 text-center mt-4">
+        By signing up, you agree to our Terms, Privacy Policy and Cookies Policy.
+      </p>
+
+    </div>
+
+    <!-- Login Box -->
+    <div class="bg-white border w-[350px] p-4 text-center mt-3 text-sm">
+      Have an account?
+      <a href="login.html" class="text-blue-500 font-semibold">Log in</a>
+    </div>
+
+  </div>
+
 </div>
 
 <script>
-const API = "https://pinterest-clone-c9rz.onrender.com/api"
+const API = "http://localhost:3000/api"
 
 async function signup(){
-  await fetch(API + "/auth/signup", {
+  const res = await fetch(API + "/auth/signup", {
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body: JSON.stringify({
@@ -44,8 +97,12 @@ async function signup(){
     })
   })
 
-  alert("Signup done")
-  location = "login.html"
+  if(res.ok){
+    alert("Signup successful")
+    location = "login.html"
+  } else {
+    alert("Signup failed")
+  }
 }
 </script>
 
