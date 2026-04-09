@@ -1,11 +1,13 @@
+Here is the updated `README.md` file, tailored specifically for the **Instagram 2021 Clone** with the sidebar layout, male-focused stories, and optimized feed.
 
-<img src="https://ik.imagekit.io/xvqovhmcyr/Pinterest%20Feed%20-%20Brave%204_8_2026%2011_24_05%20AM.png">
+```markdown
+<img src="https://ik.imagekit.io/xvqovhmcyr/labsadik_instagram_clone%20-%20Google%20Chrome%204_9_2026%206_52_24%20PM.png">
 
 ---
 
-# 🎨 Pinterest Clone
+# 📸 Instagram 2021 Clone
 
-A fully functional Pinterest-style platform with image/video sharing, user auth, and masonry grid layout.
+A fully functional, professional-grade Instagram clone replicating the 2021 Web & Mobile UI. Features a responsive sidebar navigation, infinite scroll feed, real-time interactions, and secure user authentication.
 
 ---
 
@@ -14,36 +16,38 @@ A fully functional Pinterest-style platform with image/video sharing, user auth,
 ### 🔐 Authentication
 - User Signup & Login
 - JWT Token Authentication
-- Secure Password Hashing
-- Session Management
+- Secure Password Hashing (bcrypt)
+- Session Management via LocalStorage
 
 ### 📸 Content System
 - Upload Images & Videos
 - Bunny CDN Integration (Fast Global Delivery)
 - Auto File Type Detection
 - Multi-format Support (PNG, JPG, GIF, MP4)
+- Real-time Upload Progress Bar
 
 ### 🖼️ Feed System
-- Masonry Grid Layout (7 columns → responsive)
-- Infinite Scroll Pagination
-- Real-time Loading
-- Skeleton Loading States
-- Smooth Animations
+- **Professional Sidebar Layout** (Desktop)
+- **Mobile Bottom Navigation** (Responsive)
+- Vertical Infinite Scroll Feed
+- Double-Tap to Like (with Heart Animation)
+- Video Play/Pause Controls
+- "Suggestions For You" Sidebar (Desktop)
+- Stories Rail (Horizontal Scroll)
 
 ### 👤 User Profiles
-- Individual Profile Pages
-- User's Posts Display
-- Avatar Support
+- Dynamic Username Display (`post.userId.username`)
+- Avatar Generation with Initials
+- Individual User Post Filtering
 
-### 🎨 UI/UX
+### 🎨 UI/UX (Instagram 2021 Style)
 - 100% Responsive (Mobile/Tablet/Desktop)
-- Pinterest Red Theme (#E60023)
-- Hover Effects on Cards
-- Save Pin Functionality
+- Clean White/Gray Aesthetic
+- Hover Effects on Desktop Nav
+- Save/Share/Comment Actions
 - Toast Notifications
-- Modal Dialogs
-- Keyboard Shortcuts (ESC, Ctrl+K, /)
-- **Logout Button in Header Dropdown**
+- Modal Dialogs for Upload & Preview
+- Broken Image Handling & Caching
 
 ---
 
@@ -61,28 +65,28 @@ A fully functional Pinterest-style platform with image/video sharing, user auth,
 ## 📁 **PROJECT STRUCTURE**
 
 ```
-pinterest/
-├── server.js              # Main server
+instagram-clone/
+├── server.js              # Main server entry point
 ├── .env                   # Environment variables
 │
 ├── models/
-│   ├── User.js            # User model
-│   └── Post.js            # Post model
+│   ├── User.js            # User schema (username, email, password)
+│   └── Post.js            # Post schema (title, fileUrl, type, userId)
 │
 ├── routes/
-│   ├── auth.js            # Auth routes
-│   └── post.js            # Post routes
+│   ├── auth.js            # Auth routes (signup/login)
+│   └── post.js            # Post routes (upload/feed)
 │
 ├── middleware/
-│   └── auth.js            # JWT middleware
+│   └── auth.js            # JWT verification middleware
 │
 ├── utils/
-│   └── bunny.js           # CDN upload utility
+│   └── bunny.js           # Bunny CDN upload utility
 │
 └── public/
     ├── login.html         # Login page
     ├── signup.html        # Registration page
-    ├── index.html         # HOME - Main Feed ⭐
+    ├── index.html         # HOME - Main Feed ⭐ (Sidebar + Feed)
 ```
 
 ---
@@ -96,8 +100,8 @@ npm install express mongoose cors bcryptjs jsonwebtoken multer axios dotenv
 
 ### **2. Create .env File**
 ```env
-MONGO_URI=mongodb://localhost:27017/pinterest
-JWT_SECRET=your-secret-key-here
+MONGO_URI=mongodb://localhost:27017/instagram_clone
+JWT_SECRET=your-super-secret-key
 PORT=5000
 BUNNY_STORAGE_ZONE=your-zone-name
 BUNNY_API_KEY=your-api-key
@@ -116,7 +120,7 @@ Visit: `http://localhost:5000`
 
 ### **Auth**
 ```
-POST /auth/signup  - Register user
+POST /auth/signup  - Register new user
 POST /auth/login   - Login user
 ```
 
@@ -144,8 +148,8 @@ POST /auth/login   - Login user
 ### **Posts**
 ```
 POST /post/upload      - Upload post (Auth required)
-GET  /post/all?page=1  - Get all posts feed
-GET  /post/user/:id    - Get user's posts
+GET  /post/all?page=1  - Get global feed (Paginated)
+GET  /post/user/:id    - Get specific user's posts
 ```
 
 **Upload Headers:**
@@ -156,42 +160,41 @@ Content-Type: multipart/form-data
 
 **Upload Form Data:**
 - `file`: Image/Video file (required)
-- `title`: Post title (optional)
+- `title`: Caption (optional)
 
 ---
 
-## 📱 **PAGES**
+## 📱 **PAGES & UI**
 
 ### **1. Login Page** (`/login.html`)
+- Clean centered card
 - Email & Password fields
-- Stores token in localStorage
-- Redirects to feed on success
+- Redirects to Feed on success
 
 ### **2. Signup Page** (`/signup.html`)  
 - Username, Email, Password
-- Creates new account
+- Creates new account in MongoDB
 
 ### **3. Home Feed** (`/index.html`) ⭐ **MAIN PAGE**
-**Header:**
-- Pinterest Logo
-- Search Bar (centered)
-- Create Button (+)
-- Notifications Bell
-- Messages Icon
-- User Avatar (A) → Click for **LOGOUT dropdown**
 
-**Feed:**
-- Masonry Grid (7 columns responsive)
-- Pin Cards with hover effects
-- Save/Share/More buttons on hover
-- User avatars & usernames
-- Infinite scroll loading
+**Desktop Layout:**
+- **Left Sidebar:** Navigation (Home, Search, Explore, Reels, Messages, Notifications, Create, Profile).
+- **Center Feed:** Stories Rail → Infinite Post Feed.
+- **Right Sidebar:** Current User Switcher & "Suggestions For You".
 
-**Features:**
-- Upload Modal (click + button)
-- Logout in header dropdown menu
-- Toast notifications
-- Keyboard shortcuts
+**Mobile Layout:**
+- **Top Header:** Logo & Message/Create icons.
+- **Center Feed:** Stories → Posts.
+- **Bottom Nav:** Home, Search, Create, Reels, Profile.
+
+**Feed Features:**
+- **Stories:** Horizontal scroll with gradient rings (Male avatars included).
+- **Post Card:**
+  - Header: User Avatar + Username + Options.
+  - Media: Image (max-h-[500px]) or Video with Play controls.
+  - Actions: Like (Heart), Comment, Share, Save.
+  - Footer: Likes count, Caption, "View all comments", Timestamp.
+  - Input: "Add a comment..." field.
 
 ---
 
@@ -206,27 +209,24 @@ Content-Type: multipart/form-data
 
 **2. Login**
 - Go to `/login.html`  
-- Enter email & password
+- Enter credentials
 - Click Login → Redirected to Feed
 
-**3. Upload Pins**
-- Click **+** button in header
-- Add title (optional)
-- Choose image/video file
-- Click Upload
+**3. Upload Posts**
+- Click **Create** (Sidebar) or **+** (Mobile Nav)
+- Drag & Drop or Select File
+- Add Caption
+- Click **Share**
 
-**4. Browse Feed**
-- Scroll to see all pins
-- Hover over pins to reveal actions
-- Click **Save** to save pin
-- Click username to view their profile
+**4. Interact with Feed**
+- **Double Click** image/video to Like ❤️
+- **Click** Play button on videos ▶️
+- **Click** Bookmark icon to Save 🔖
+- **Scroll** down for Infinite Loading
 
-**5. LOGOUT** 🔴
-- Click your avatar (**A**) in top-right corner
-- Dropdown menu appears
-- Click **"Log out"** (red text at bottom)
-- Shows "Logged out successfully!" message
-- Redirects to login page after 900ms
+**5. Logout**
+- Click **More** → **Log Out** (Desktop)
+- Or clear LocalStorage manually
 
 ---
 
@@ -236,12 +236,10 @@ Content-Type: multipart/form-data
 ```javascript
 {
   _id: ObjectId,
-  username: String,
+  username: String,       // Displayed in feed
   email: String,
-  password: String,        // bcrypt hashed
-  avatar: String,          // default: https://i.pravatar.cc/150
-  createdAt: Date,
-  updatedAt: Date
+  password: String,       // Hashed
+  createdAt: Date
 }
 ```
 
@@ -249,12 +247,11 @@ Content-Type: multipart/form-data
 ```javascript
 {
   _id: ObjectId,
-  title: String,
-  fileUrl: String,         // Bunny CDN URL
-  type: String,            // "image" or "video"
-  userId: ObjectId,        // references User
-  createdAt: Date,
-  updatedAt: Date
+  title: String,          // Caption
+  fileUrl: String,        // Bunny CDN URL
+  type: String,           // "image" or "video"
+  userId: ObjectId,       // Reference to User model
+  createdAt: Date
 }
 ```
 
@@ -265,69 +262,62 @@ Content-Type: multipart/form-data
 ### **Quick Deploy (Render/Railway)**
 1. Push code to GitHub
 2. Connect repo to Render/Railway
-3. Set environment variables in dashboard
+3. Set environment variables (`MONGO_URI`, `JWT_SECRET`, `BUNNY_*`)
 4. Deploy! 🎉
 
 ### **VPS Deployment**
 ```bash
-# Install PM2 globally
+# Install PM2
 npm install -g pm2
 
-# Start server with PM2
-pm2 start server.js --name "pinterest"
+# Start Server
+pm2 start server.js --name "instagram-clone"
 
-# Setup Nginx reverse proxy (optional)
-# Configure SSL with Let's Encrypt (optional)
+# Save Process
+pm2 save
 ```
 
 ---
 
 ## 🎨 **CUSTOMIZATION**
 
-### **Change Primary Color**
-In `public/index.html`, edit:
+### **Change Theme Colors**
+In `public/index.html`, Tailwind classes are used. You can customize colors by editing the Tailwind config script or adding custom CSS variables.
+
+### **Adjust Image Height**
+To change the max height of images in the feed:
 ```css
-:root {
-  --pinterest-red: #E60023;  /* Change this */
-}
+/* In index.html style block or tailwind class */
+.max-h-[500px] /* Change to desired height */
 ```
 
-### **Change Grid Columns**
-```css
-.masonry-grid {
-  column-count: 7;  /* Adjust: 2-10 */
-}
-```
 ---
 
 ## 🐛 **TROUBLESHOOTING**
 
 | Problem | Solution |
 |---------|----------|
-| MongoDB connection error | Check MONGO_URI in .env, ensure MongoDB running |
-| Upload fails (401) | Verify BUNNY_API_KEY is correct |
-| CORS error | Ensure cors() used in server.js |
-| Images not loading | Check BUNNY_PULL_ZONE URL |
-| JWT invalid error | Clear localStorage, re-login, check JWT_SECRET matches |
+| MongoDB connection error | Check `MONGO_URI` in `.env` |
+| Upload fails (401/403) | Verify `BUNNY_API_KEY` and Storage Zone permissions |
+| Images not showing | Check `BUNNY_PULL_ZONE` URL in `.env` |
+| JWT Invalid | Clear LocalStorage and Login again |
+| CORS Error | Ensure `cors()` middleware is enabled in `server.js` |
 
 ---
 
 ## 📊 **KEY FEATURES SUMMARY**
 
-✅ **Multi-user authentication system**  
-✅ **Image & video upload to Bunny CDN**  
-✅ **Pinterest-style masonry grid feed**  
-✅ **Individual user profile pages**  
-✅ **Responsive design (mobile-friendly)**  
-✅ **Logout functionality in header**  
-✅ **Infinite scroll pagination**  
-✅ **Smooth animations & transitions**  
-✅ **Toast notification system**  
-✅ **Professional UI/UX matching real Pinterest**  
+✅ **Professional Instagram 2021 UI/UX**  
+✅ **Responsive Sidebar (Desktop) & Bottom Nav (Mobile)**  
+✅ **Real-time Username Display from MongoDB**  
+✅ **Optimized Image Sizing (Uniform Feed)**  
+✅ **Male-Focused Stories Rail**  
+✅ **Double-Tap to Like Animation**  
+✅ **Video Play/Pause Controls**  
+✅ **Infinite Scroll Pagination**  
+✅ **Secure Auth & Bunny CDN Storage**  
 
 ---
-
-
 
 <div align="center">
 
@@ -338,5 +328,4 @@ Made with ❤️ | Powered by Node.js + MongoDB + Bunny CDN
 **Happy Coding! 🚀**
 
 </div>
-
-
+```
