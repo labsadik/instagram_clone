@@ -1,13 +1,11 @@
-Here is the updated `README.md` file, tailored specifically for the **Instagram 2021 Clone** with the sidebar layout, male-focused stories, and optimized feed.
 
-```markdown
 <img src="https://ik.imagekit.io/xvqovhmcyr/labsadik_instagram_clone%20-%20Google%20Chrome%204_9_2026%206_52_24%20PM.png">
 
 ---
 
-# 📸 Instagram 2021 Clone
+# 🎨 Instagram 2021 Clone
 
-A fully functional, professional-grade Instagram clone replicating the 2021 Web & Mobile UI. Features a responsive sidebar navigation, infinite scroll feed, real-time interactions, and secure user authentication.
+A fully functional Instagram 2021 Clone-style platform with image/video sharing, user auth, and masonry grid layout.
 
 ---
 
@@ -16,38 +14,36 @@ A fully functional, professional-grade Instagram clone replicating the 2021 Web 
 ### 🔐 Authentication
 - User Signup & Login
 - JWT Token Authentication
-- Secure Password Hashing (bcrypt)
-- Session Management via LocalStorage
+- Secure Password Hashing
+- Session Management
 
 ### 📸 Content System
 - Upload Images & Videos
 - Bunny CDN Integration (Fast Global Delivery)
 - Auto File Type Detection
 - Multi-format Support (PNG, JPG, GIF, MP4)
-- Real-time Upload Progress Bar
 
 ### 🖼️ Feed System
-- **Professional Sidebar Layout** (Desktop)
-- **Mobile Bottom Navigation** (Responsive)
-- Vertical Infinite Scroll Feed
-- Double-Tap to Like (with Heart Animation)
-- Video Play/Pause Controls
-- "Suggestions For You" Sidebar (Desktop)
-- Stories Rail (Horizontal Scroll)
+- Masonry Grid Layout (1 post → responsive)
+- Infinite Scroll Pagination
+- Real-time Loading
+- Skeleton Loading States
+- Smooth Animations
 
 ### 👤 User Profiles
-- Dynamic Username Display (`post.userId.username`)
-- Avatar Generation with Initials
-- Individual User Post Filtering
+- Individual Profile Pages
+- User's Posts Display
+- Avatar Support
 
-### 🎨 UI/UX (Instagram 2021 Style)
+### 🎨 UI/UX
 - 100% Responsive (Mobile/Tablet/Desktop)
-- Clean White/Gray Aesthetic
-- Hover Effects on Desktop Nav
-- Save/Share/Comment Actions
+-  Instagram 2021 Theme 
+- Hover Effects on Cards
+- Save Pin Functionality
 - Toast Notifications
-- Modal Dialogs for Upload & Preview
-- Broken Image Handling & Caching
+- Modal Dialogs
+- Keyboard Shortcuts (ESC, Ctrl+K, /)
+- **Logout Button in Header Dropdown**
 
 ---
 
@@ -65,28 +61,28 @@ A fully functional, professional-grade Instagram clone replicating the 2021 Web 
 ## 📁 **PROJECT STRUCTURE**
 
 ```
-instagram-clone/
-├── server.js              # Main server entry point
+pinterest/
+├── server.js              # Main server
 ├── .env                   # Environment variables
 │
 ├── models/
-│   ├── User.js            # User schema (username, email, password)
-│   └── Post.js            # Post schema (title, fileUrl, type, userId)
+│   ├── User.js            # User model
+│   └── Post.js            # Post model
 │
 ├── routes/
-│   ├── auth.js            # Auth routes (signup/login)
-│   └── post.js            # Post routes (upload/feed)
+│   ├── auth.js            # Auth routes
+│   └── post.js            # Post routes
 │
 ├── middleware/
-│   └── auth.js            # JWT verification middleware
+│   └── auth.js            # JWT middleware
 │
 ├── utils/
-│   └── bunny.js           # Bunny CDN upload utility
+│   └── bunny.js           # CDN upload utility
 │
 └── public/
     ├── login.html         # Login page
     ├── signup.html        # Registration page
-    ├── index.html         # HOME - Main Feed ⭐ (Sidebar + Feed)
+    ├── index.html         # HOME - Main Feed ⭐
 ```
 
 ---
@@ -100,8 +96,8 @@ npm install express mongoose cors bcryptjs jsonwebtoken multer axios dotenv
 
 ### **2. Create .env File**
 ```env
-MONGO_URI=mongodb://localhost:27017/instagram_clone
-JWT_SECRET=your-super-secret-key
+MONGO_URI=mongodb://localhost:27017/Instagram
+JWT_SECRET=your-secret-key-here
 PORT=5000
 BUNNY_STORAGE_ZONE=your-zone-name
 BUNNY_API_KEY=your-api-key
@@ -120,7 +116,7 @@ Visit: `http://localhost:5000`
 
 ### **Auth**
 ```
-POST /auth/signup  - Register new user
+POST /auth/signup  - Register user
 POST /auth/login   - Login user
 ```
 
@@ -148,8 +144,8 @@ POST /auth/login   - Login user
 ### **Posts**
 ```
 POST /post/upload      - Upload post (Auth required)
-GET  /post/all?page=1  - Get global feed (Paginated)
-GET  /post/user/:id    - Get specific user's posts
+GET  /post/all?page=1  - Get all posts feed
+GET  /post/user/:id    - Get user's posts
 ```
 
 **Upload Headers:**
@@ -160,41 +156,42 @@ Content-Type: multipart/form-data
 
 **Upload Form Data:**
 - `file`: Image/Video file (required)
-- `title`: Caption (optional)
+- `title`: Post title (optional)
 
 ---
 
-## 📱 **PAGES & UI**
+## 📱 **PAGES**
 
 ### **1. Login Page** (`/login.html`)
-- Clean centered card
 - Email & Password fields
-- Redirects to Feed on success
+- Stores token in localStorage
+- Redirects to feed on success
 
 ### **2. Signup Page** (`/signup.html`)  
 - Username, Email, Password
-- Creates new account in MongoDB
+- Creates new account
 
 ### **3. Home Feed** (`/index.html`) ⭐ **MAIN PAGE**
+**Header:**
+- Instagram 2021 Clone Logo
+- Search Bar (centered)
+- Create Button (+)
+- Notifications Bell
+- Messages Icon
+- User Avatar (A) → Click for **LOGOUT dropdown**
 
-**Desktop Layout:**
-- **Left Sidebar:** Navigation (Home, Search, Explore, Reels, Messages, Notifications, Create, Profile).
-- **Center Feed:** Stories Rail → Infinite Post Feed.
-- **Right Sidebar:** Current User Switcher & "Suggestions For You".
+**Feed:**
+- Masonry Grid (7 columns responsive)
+- Pin Cards with hover effects
+- Save/Share/More buttons on hover
+- User avatars & usernames
+- Infinite scroll loading
 
-**Mobile Layout:**
-- **Top Header:** Logo & Message/Create icons.
-- **Center Feed:** Stories → Posts.
-- **Bottom Nav:** Home, Search, Create, Reels, Profile.
-
-**Feed Features:**
-- **Stories:** Horizontal scroll with gradient rings (Male avatars included).
-- **Post Card:**
-  - Header: User Avatar + Username + Options.
-  - Media: Image (max-h-[500px]) or Video with Play controls.
-  - Actions: Like (Heart), Comment, Share, Save.
-  - Footer: Likes count, Caption, "View all comments", Timestamp.
-  - Input: "Add a comment..." field.
+**Features:**
+- Upload Modal (click + button)
+- Logout in header dropdown menu
+- Toast notifications
+- Keyboard shortcuts
 
 ---
 
@@ -209,24 +206,27 @@ Content-Type: multipart/form-data
 
 **2. Login**
 - Go to `/login.html`  
-- Enter credentials
+- Enter email & password
 - Click Login → Redirected to Feed
 
-**3. Upload Posts**
-- Click **Create** (Sidebar) or **+** (Mobile Nav)
-- Drag & Drop or Select File
-- Add Caption
-- Click **Share**
+**3. Upload Pins**
+- Click **+** button in header
+- Add title (optional)
+- Choose image/video file
+- Click Upload
 
-**4. Interact with Feed**
-- **Double Click** image/video to Like ❤️
-- **Click** Play button on videos ▶️
-- **Click** Bookmark icon to Save 🔖
-- **Scroll** down for Infinite Loading
+**4. Browse Feed**
+- Scroll to see all pins
+- Hover over pins to reveal actions
+- Click **Save** to save pin
+- Click username to view their profile
 
-**5. Logout**
-- Click **More** → **Log Out** (Desktop)
-- Or clear LocalStorage manually
+**5. LOGOUT** 🔴
+- Click your avatar (**A**) in top-right corner
+- Dropdown menu appears
+- Click **"Log out"** (red text at bottom)
+- Shows "Logged out successfully!" message
+- Redirects to login page after 900ms
 
 ---
 
@@ -236,10 +236,12 @@ Content-Type: multipart/form-data
 ```javascript
 {
   _id: ObjectId,
-  username: String,       // Displayed in feed
+  username: String,
   email: String,
-  password: String,       // Hashed
-  createdAt: Date
+  password: String,        // bcrypt hashed
+  avatar: String,          // default: https://i.pravatar.cc/150
+  createdAt: Date,
+  updatedAt: Date
 }
 ```
 
@@ -247,11 +249,12 @@ Content-Type: multipart/form-data
 ```javascript
 {
   _id: ObjectId,
-  title: String,          // Caption
-  fileUrl: String,        // Bunny CDN URL
-  type: String,           // "image" or "video"
-  userId: ObjectId,       // Reference to User model
-  createdAt: Date
+  title: String,
+  fileUrl: String,         // Bunny CDN URL
+  type: String,            // "image" or "video"
+  userId: ObjectId,        // references User
+  createdAt: Date,
+  updatedAt: Date
 }
 ```
 
@@ -262,33 +265,19 @@ Content-Type: multipart/form-data
 ### **Quick Deploy (Render/Railway)**
 1. Push code to GitHub
 2. Connect repo to Render/Railway
-3. Set environment variables (`MONGO_URI`, `JWT_SECRET`, `BUNNY_*`)
+3. Set environment variables in dashboard
 4. Deploy! 🎉
 
 ### **VPS Deployment**
 ```bash
-# Install PM2
+# Install PM2 globally
 npm install -g pm2
 
-# Start Server
-pm2 start server.js --name "instagram-clone"
+# Start server with PM2
+pm2 start server.js --name "pinterest"
 
-# Save Process
-pm2 save
-```
-
----
-
-## 🎨 **CUSTOMIZATION**
-
-### **Change Theme Colors**
-In `public/index.html`, Tailwind classes are used. You can customize colors by editing the Tailwind config script or adding custom CSS variables.
-
-### **Adjust Image Height**
-To change the max height of images in the feed:
-```css
-/* In index.html style block or tailwind class */
-.max-h-[500px] /* Change to desired height */
+# Setup Nginx reverse proxy (optional)
+# Configure SSL with Let's Encrypt (optional)
 ```
 
 ---
@@ -297,27 +286,30 @@ To change the max height of images in the feed:
 
 | Problem | Solution |
 |---------|----------|
-| MongoDB connection error | Check `MONGO_URI` in `.env` |
-| Upload fails (401/403) | Verify `BUNNY_API_KEY` and Storage Zone permissions |
-| Images not showing | Check `BUNNY_PULL_ZONE` URL in `.env` |
-| JWT Invalid | Clear LocalStorage and Login again |
-| CORS Error | Ensure `cors()` middleware is enabled in `server.js` |
+| MongoDB connection error | Check MONGO_URI in .env, ensure MongoDB running |
+| Upload fails (401) | Verify BUNNY_API_KEY is correct |
+| CORS error | Ensure cors() used in server.js |
+| Images not loading | Check BUNNY_PULL_ZONE URL |
+| JWT invalid error | Clear localStorage, re-login, check JWT_SECRET matches |
 
 ---
 
 ## 📊 **KEY FEATURES SUMMARY**
 
-✅ **Professional Instagram 2021 UI/UX**  
-✅ **Responsive Sidebar (Desktop) & Bottom Nav (Mobile)**  
-✅ **Real-time Username Display from MongoDB**  
-✅ **Optimized Image Sizing (Uniform Feed)**  
-✅ **Male-Focused Stories Rail**  
-✅ **Double-Tap to Like Animation**  
-✅ **Video Play/Pause Controls**  
-✅ **Infinite Scroll Pagination**  
-✅ **Secure Auth & Bunny CDN Storage**  
+✅ **Multi-user authentication system**  
+✅ **Image & video upload to Bunny CDN**  
+✅ ** Instagram 2021-style masonry grid feed**  
+✅ **Individual user profile pages**  
+✅ **Responsive design (mobile-friendly)**  
+✅ **Logout functionality in header**  
+✅ **Infinite scroll pagination**  
+✅ **Smooth animations & transitions**  
+✅ **Toast notification system**  
+✅ **Professional UI/UX matching real Pinterest**  
 
 ---
+
+
 
 <div align="center">
 
@@ -328,4 +320,5 @@ Made with ❤️ | Powered by Node.js + MongoDB + Bunny CDN
 **Happy Coding! 🚀**
 
 </div>
-```
+
+
